@@ -77,11 +77,11 @@ public class labirinto extends JFrame {
 		for (int c1 = 0; c1 < maze.getLado(); c1++) {
 			for (int c2 = 0; c2 < maze.getLado(); c2++) {
 				JPanel panel;
-				if (c1 == myHero.getY() && c2 == myHero.getX() && mySword.getY() == 0 && mySword.getX() == 0 ){
+				if (c1 == myHero.getY() && c2 == myHero.getX() && myHero.getDrawing() == 'A' ){
 					panel = new ash();
 					panel.setLayout(new BorderLayout());
 				}
-				if (c1 == myHero.getY() && c2 == myHero.getX() && mySword.getY() != 0 && mySword.getX() != 0 ){
+				else if (c1 == myHero.getY() && c2 == myHero.getX() && myHero.getDrawing() == 'H' ){
 					panel = new heroi();
 					panel.setLayout(new BorderLayout());
 				}

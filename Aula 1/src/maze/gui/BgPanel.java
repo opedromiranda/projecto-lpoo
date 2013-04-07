@@ -41,10 +41,10 @@ class aguia extends JPanel{
 }
 
 class ash extends JPanel{
-	Image bg = new ImageIcon("ash.jpg").getImage();
+	Image ash = new ImageIcon("ash.jpg").getImage();
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(ash, 0, 0, getWidth(), getHeight(), this);
     }
 }
 
