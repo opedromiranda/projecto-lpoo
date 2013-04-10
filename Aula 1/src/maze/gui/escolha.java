@@ -30,6 +30,24 @@ public class escolha extends JFrame {
 	public int dragons;
 	public int tamanho;
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame.setVisible(false);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
 	public escolha() {
 		
 		dragons = 0;
@@ -86,7 +104,6 @@ public class escolha extends JFrame {
 					JDialog nada = new nada();
 				}
 				else{
-					labirinto labirinto = new labirinto(tamanho, dragons);
 					setVisible(false);
 					
 				}

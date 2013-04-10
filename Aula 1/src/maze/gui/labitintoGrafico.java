@@ -27,7 +27,7 @@ import javax.swing.JSpinner;
 
 
 
-public class labirintoGrafico {
+public class labitintoGrafico {
 
 	private JFrame frame;
 
@@ -38,7 +38,7 @@ public class labirintoGrafico {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					labirintoGrafico window = new labirintoGrafico();
+					labitintoGrafico window = new labitintoGrafico();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +50,7 @@ public class labirintoGrafico {
 	/**
 	 * Create the application.
 	 */
-	public labirintoGrafico() {
+	public labitintoGrafico() {
 		initialize();
 	}
 
@@ -77,12 +77,6 @@ public class labirintoGrafico {
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("MANUAL");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JFrame opcoesManual = new escolhaManual();
-				opcoesManual.setVisible(true);
-			}
-		});
 		panel.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("CARREGAR");
@@ -95,9 +89,6 @@ public class labirintoGrafico {
 					System.exit(0);
 			}
 		});
-		
-		JButton btnNewButton = new JButton("Instru\u00E7\u00F5es");
-		panel.add(btnNewButton);
 		
 		
 		panel.add(btnNewButton_4);
