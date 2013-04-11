@@ -16,9 +16,10 @@ public class JogoLabirinto {
 	static int NUM_ROWS = 10;
 	static int NUM_COLUMNS = 10;
 	static char[][] matrix;
+	char[][] matrixDefault;
 	static int[] heroPosition, dragonPosition;
 
-	static Hero myHero = new Hero();
+	public static Hero myHero = new Hero();
 	static Sword mySword = new Sword();
 	static Eagle myEagle = new Eagle();
 	
@@ -81,6 +82,14 @@ public class JogoLabirinto {
 
 	}
 	
+	
+	public JogoLabirinto(){
+		
+		createDefaultMatrix();
+		myHero.setX(1);
+		myHero.setY(1);
+		
+	};
 
 	private static void printMaze() {
 
@@ -109,6 +118,9 @@ public class JogoLabirinto {
 		
 		
 	}
+	
+	
+	
 
 	static boolean processOp(String op) {
 		boolean exit = false;
@@ -224,6 +236,49 @@ public class JogoLabirinto {
 	}
 
 
+	public void moverHeroi(char movement) {
+		
+		int[] newHeroPosition = new int[2];
+		switch (movement) {
+		case 'w':
+			newHeroPosition[0] = myHero.getY() - 1;
+			newHeroPosition[1] = myHero.getX();
+			break;
+		case 'a':
+			newHeroPosition[0] = myHero.getY();
+			newHeroPosition[1] = myHero.getX() - 1;
+			break;
+		case 's':
+			newHeroPosition[0] = myHero.getY() + 1;
+			newHeroPosition[1] = myHero.getX();
+			break;
+		case 'd':
+			newHeroPosition[0] = myHero.getY();
+			newHeroPosition[1] = myHero.getX() + 1;
+			break;
+			
+			default:
+				break;
+		}
+		
+		
+		switch (matrixDefault[newHeroPosition[0]][newHeroPosition[1]]) {
+		case ' ':
+
+			myHero.setX(newHeroPosition[1]);
+			myHero.setY(newHeroPosition[0]);
+			break;
+			
+		case 'X':
+			break;
+		default:
+			break;
+		}
+			
+		
+	}
+
+
 	static void moveEagle(){
 		int dx,dy;
 		if(myEagle.hasSword()){ // tem espada, volta para o heroi
@@ -270,117 +325,121 @@ public class JogoLabirinto {
 		}
 	}
 
-	static void createDefaultMatrix() {
+	public void createDefaultMatrix() {
 
-		matrix[0][0] = 'X';
-		matrix[0][1] = 'X';
-		matrix[0][2] = 'X';
-		matrix[0][3] = 'X';
-		matrix[0][4] = 'X';
-		matrix[0][5] = 'X';
-		matrix[0][6] = 'X';
-		matrix[0][7] = 'X';
-		matrix[0][8] = 'X';
-		matrix[0][9] = 'X';
+		char[][] matrixDefault = null;
+		
+		matrixDefault[0][0] = 'X';
+		matrixDefault[0][1] = 'X';
+		matrixDefault[0][2] = 'X';
+		matrixDefault[0][3] = 'X';
+		matrixDefault[0][4] = 'X';
+		matrixDefault[0][5] = 'X';
+		matrixDefault[0][6] = 'X';
+		matrixDefault[0][7] = 'X';
+		matrixDefault[0][8] = 'X';
+		matrixDefault[0][9] = 'X';
 
-		matrix[1][0] = 'X';
-		matrix[1][1] = 'H';
-		matrix[1][2] = ' ';
-		matrix[1][3] = ' ';
-		matrix[1][4] = ' ';
-		matrix[1][5] = ' ';
-		matrix[1][6] = ' ';
-		matrix[1][7] = ' ';
-		matrix[1][8] = ' ';
-		matrix[1][9] = 'X';
+		matrixDefault[1][0] = 'X';
+		matrixDefault[1][1] = 'H';
+		matrixDefault[1][2] = ' ';
+		matrixDefault[1][3] = ' ';
+		matrixDefault[1][4] = ' ';
+		matrixDefault[1][5] = ' ';
+		matrixDefault[1][6] = ' ';
+		matrixDefault[1][7] = ' ';
+		matrixDefault[1][8] = ' ';
+		matrixDefault[1][9] = 'X';
 
-		matrix[2][0] = 'X';
-		matrix[2][1] = ' ';
-		matrix[2][2] = 'X';
-		matrix[2][3] = 'X';
-		matrix[2][4] = ' ';
-		matrix[2][5] = 'X';
-		matrix[2][6] = ' ';
-		matrix[2][7] = 'X';
-		matrix[2][8] = ' ';
-		matrix[2][9] = 'X';
+		matrixDefault[2][0] = 'X';
+		matrixDefault[2][1] = ' ';
+		matrixDefault[2][2] = 'X';
+		matrixDefault[2][3] = 'X';
+		matrixDefault[2][4] = ' ';
+		matrixDefault[2][5] = 'X';
+		matrixDefault[2][6] = ' ';
+		matrixDefault[2][7] = 'X';
+		matrixDefault[2][8] = ' ';
+		matrixDefault[2][9] = 'X';
 
-		matrix[3][0] = 'X';
-		matrix[3][1] = 'D';
-		matrix[3][2] = 'X';
-		matrix[3][3] = 'X';
-		matrix[3][4] = ' ';
-		matrix[3][5] = 'X';
-		matrix[3][6] = ' ';
-		matrix[3][7] = 'X';
-		matrix[3][8] = ' ';
-		matrix[3][9] = 'X';
+		matrixDefault[3][0] = 'X';
+		matrixDefault[3][1] = 'D';
+		matrixDefault[3][2] = 'X';
+		matrixDefault[3][3] = 'X';
+		matrixDefault[3][4] = ' ';
+		matrixDefault[3][5] = 'X';
+		matrixDefault[3][6] = ' ';
+		matrixDefault[3][7] = 'X';
+		matrixDefault[3][8] = ' ';
+		matrixDefault[3][9] = 'X';
 
-		matrix[4][0] = 'X';
-		matrix[4][1] = ' ';
-		matrix[4][2] = 'X';
-		matrix[4][3] = 'X';
-		matrix[4][4] = ' ';
-		matrix[4][5] = 'X';
-		matrix[4][6] = ' ';
-		matrix[4][7] = 'X';
-		matrix[4][8] = ' ';
-		matrix[4][9] = 'X';
+		matrixDefault[4][0] = 'X';
+		matrixDefault[4][1] = ' ';
+		matrixDefault[4][2] = 'X';
+		matrixDefault[4][3] = 'X';
+		matrixDefault[4][4] = ' ';
+		matrixDefault[4][5] = 'X';
+		matrixDefault[4][6] = ' ';
+		matrixDefault[4][7] = 'X';
+		matrixDefault[4][8] = ' ';
+		matrixDefault[4][9] = 'X';
 
-		matrix[5][0] = 'X';
-		matrix[5][1] = ' ';
-		matrix[5][2] = ' ';
-		matrix[5][3] = ' ';
-		matrix[5][4] = ' ';
-		matrix[5][5] = ' ';
-		matrix[5][6] = ' ';
-		matrix[5][7] = 'X';
-		matrix[5][8] = ' ';
-		matrix[5][9] = 'S';
+		matrixDefault[5][0] = 'X';
+		matrixDefault[5][1] = ' ';
+		matrixDefault[5][2] = ' ';
+		matrixDefault[5][3] = ' ';
+		matrixDefault[5][4] = ' ';
+		matrixDefault[5][5] = ' ';
+		matrixDefault[5][6] = ' ';
+		matrixDefault[5][7] = 'X';
+		matrixDefault[5][8] = ' ';
+		matrixDefault[5][9] = 'S';
 
-		matrix[6][0] = 'X';
-		matrix[6][1] = ' ';
-		matrix[6][2] = 'X';
-		matrix[6][3] = 'X';
-		matrix[6][4] = ' ';
-		matrix[6][5] = 'X';
-		matrix[6][6] = ' ';
-		matrix[6][7] = 'X';
-		matrix[6][8] = ' ';
-		matrix[6][9] = 'X';
+		matrixDefault[6][0] = 'X';
+		matrixDefault[6][1] = ' ';
+		matrixDefault[6][2] = 'X';
+		matrixDefault[6][3] = 'X';
+		matrixDefault[6][4] = ' ';
+		matrixDefault[6][5] = 'X';
+		matrixDefault[6][6] = ' ';
+		matrixDefault[6][7] = 'X';
+		matrixDefault[6][8] = ' ';
+		matrixDefault[6][9] = 'X';
 
-		matrix[7][0] = 'X';
-		matrix[7][1] = ' ';
-		matrix[7][2] = 'X';
-		matrix[7][3] = 'X';
-		matrix[7][4] = ' ';
-		matrix[7][5] = 'X';
-		matrix[7][6] = ' ';
-		matrix[7][7] = 'X';
-		matrix[7][8] = ' ';
-		matrix[7][9] = 'X';
+		matrixDefault[7][0] = 'X';
+		matrixDefault[7][1] = ' ';
+		matrixDefault[7][2] = 'X';
+		matrixDefault[7][3] = 'X';
+		matrixDefault[7][4] = ' ';
+		matrixDefault[7][5] = 'X';
+		matrixDefault[7][6] = ' ';
+		matrixDefault[7][7] = 'X';
+		matrixDefault[7][8] = ' ';
+		matrixDefault[7][9] = 'X';
 
-		matrix[8][0] = 'X';
-		matrix[8][1] = 'E';
-		matrix[8][2] = 'X';
-		matrix[8][3] = 'X';
-		matrix[8][4] = ' ';
-		matrix[8][5] = ' ';
-		matrix[8][6] = ' ';
-		matrix[8][7] = ' ';
-		matrix[8][8] = ' ';
-		matrix[8][9] = 'X';
+		matrixDefault[8][0] = 'X';
+		matrixDefault[8][1] = 'E';
+		matrixDefault[8][2] = 'X';
+		matrixDefault[8][3] = 'X';
+		matrixDefault[8][4] = ' ';
+		matrixDefault[8][5] = ' ';
+		matrixDefault[8][6] = ' ';
+		matrixDefault[8][7] = ' ';
+		matrixDefault[8][8] = ' ';
+		matrixDefault[8][9] = 'X';
 
-		matrix[9][0] = 'X';
-		matrix[9][1] = 'X';
-		matrix[9][2] = 'X';
-		matrix[9][3] = 'X';
-		matrix[9][4] = 'X';
-		matrix[9][5] = 'X';
-		matrix[9][6] = 'X';
-		matrix[9][7] = 'X';
-		matrix[9][8] = 'X';
-		matrix[9][9] = 'X';
+		matrixDefault[9][0] = 'X';
+		matrixDefault[9][1] = 'X';
+		matrixDefault[9][2] = 'X';
+		matrixDefault[9][3] = 'X';
+		matrixDefault[9][4] = 'X';
+		matrixDefault[9][5] = 'X';
+		matrixDefault[9][6] = 'X';
+		matrixDefault[9][7] = 'X';
+		matrixDefault[9][8] = 'X';
+		matrixDefault[9][9] = 'X';
+		
+		this.matrixDefault = matrixDefault;
 	}
 
 }

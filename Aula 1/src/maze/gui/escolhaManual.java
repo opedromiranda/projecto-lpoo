@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
-public class escolha extends JFrame {
+public class escolhaManual extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtSelecioneOTamanho;
@@ -30,7 +30,8 @@ public class escolha extends JFrame {
 	public int dragons;
 	public int tamanho;
 
-	public escolha() {
+
+	public escolhaManual() {
 		
 		dragons = 0;
 		tamanho = 0;
@@ -79,14 +80,14 @@ public class escolha extends JFrame {
 		spinner_1.setBounds(289, 105, 62, 20);
 		contentPane.add(spinner_1);
 		
-		final JButton btnNewButton = new JButton("Jogar");
+		final JButton btnNewButton = new JButton("Criar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(dragons == 0 || tamanho < 5){
 					JDialog nada = new nada();
 				}
 				else{
-					labirinto labirinto = new labirinto(tamanho, dragons);
+					labirintoManual labirintoManual = new labirintoManual(tamanho, dragons);
 					setVisible(false);
 					
 				}

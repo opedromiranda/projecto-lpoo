@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,23 +48,6 @@ public class labirinto extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					labirinto frame = new labirinto();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 * @return 
 	 */
 
 	public void printMaze() {
@@ -132,9 +116,11 @@ public class labirinto extends JFrame {
 			matrix[dragons.elementAt(i).getY()][dragons.elementAt(i).getX()] = ' ';
 		}
 	}
-	public labirinto(/*int tamanho, int numDragons*/) {
-		/*this.tamanho = tamanho;
-		this.numDragons = numDragons;*/
+	
+	
+	public labirinto(int tamanho, int numDragons) {
+		this.tamanho = tamanho;
+		this.numDragons = numDragons;
 
 
 		setVisible(true);
@@ -143,14 +129,14 @@ public class labirinto extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(13, 13));
+		contentPane.setLayout(new GridLayout(tamanho, tamanho));
 
 		keyMove = new KeyMoveListener();
 		contentPane.addKeyListener(keyMove);
 		contentPane.setFocusable(true);
 		contentPane.requestFocusInWindow();
 
-		maze = new Maze(13);
+		maze = new Maze(tamanho);
 		matrix = maze.generate();
 
 		caminho = maze.getCaminho();
@@ -160,12 +146,11 @@ public class labirinto extends JFrame {
 		posJogador = caminho.elementAt(r.nextInt(caminho.size()));
 		posEspada = caminho.elementAt(r.nextInt(caminho.size()));
 
-		for(int i = 0; i < 1 ; i++){
+		for(int i = 0; i < numDragons ; i++){
 			Dragon myDragon = new Dragon();
 			posDragao = caminho.elementAt(r.nextInt(caminho.size()));
 			myDragon.setX(posDragao.getX());
 			myDragon.setY(posDragao.getY());
-			System.out.print(posDragao.getX() + " pos Y " + posDragao.getY()); 
 
 			dragons.add(myDragon);
 
@@ -216,6 +201,8 @@ public class labirinto extends JFrame {
 				myHero.setX(newHeroPosition[1]);
 				myHero.setY(newHeroPosition[0]);
 				System.out.println("WIN!");
+				JDialog ganhou = new ganhou();
+				setVisible(false);
 			}
 			break;
 
@@ -244,12 +231,13 @@ public class labirinto extends JFrame {
 
 					if (myHero.hasSword() == false) {
 						System.out.println("Morre heroi");
+						JDialog perdeu = new perdeu();
+						setVisible(false);
 						exit = true;
 					} else if (myHero.getDrawing() == 'A') {
 						System.out.println("Morre diabo!");
 
 						dragons.elementAt(i).dragonIsInHell = true;
-						// SEND DRAGON TO HELL (matrix boundaries)
 						dragons.elementAt(i).setDrawing('W');
 						dragons.elementAt(i).setX(0);
 						dragons.elementAt(i).setY(0);
@@ -267,7 +255,7 @@ public class labirinto extends JFrame {
 		if(myEagle.hasSword()){ // tem espada, volta para o heroi
 			dx = myEagle.getX() - myHero.getX();
 			dy = myEagle.getY() - myHero.getY();
-			if(dx == 0 && dy == 0){
+			if((dx  == 1 && dy == 0) || (dx  == 0 && dy == 1) || (dx  == -1 && dy == 0) || (dx  == 0 && dy == -1) ){
 				myEagle.setFree(false);
 				myHero.setHasSword(true);
 			}
@@ -328,6 +316,11 @@ public class labirinto extends JFrame {
 					myEagle.setFree(true);
 				}
 				break;
+			case KeyEvent.VK_S:
+				
+				
+				break;
+				
 
 			default:
 			}
