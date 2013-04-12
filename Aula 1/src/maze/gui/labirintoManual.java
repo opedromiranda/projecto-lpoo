@@ -154,11 +154,11 @@ public void reprintMaze(JPanel alterar, String tipo ) {
 			
 			
 			
-			panel2 = new parede();
-			panel2.setLayout(new BorderLayout());
+			//panel2 = new parede();
+			//panel2.setLayout(new BorderLayout());
 			
 			
-			repaintMaze(panel2, "parede");
+			///epaintMaze(panel2, "parede");
 			
 		}
 
