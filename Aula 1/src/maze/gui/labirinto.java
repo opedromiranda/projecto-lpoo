@@ -185,13 +185,23 @@ public class labirinto extends JFrame {
 		
 		JSONObject json = new JSONObject(gameData);
 
-		JSONObject json_espada = json.getJSONObject("eagle");
+		JSONObject json_eagle = json.getJSONObject("eagle");
+		
+		myEagle.setX(json_eagle.getInt("x"));
+		myEagle.setY(json_eagle.getInt("y"));
+		myEagle.setHasSword(json_eagle.getBoolean("has_sword"));
+		myEagle.setFree(json_eagle.getBoolean("is_free"));
+
 		myHero.setX(json.getInt("jogador_x"));
 		myHero.setY(json.getInt("jogador_y"));
-
+		myHero.setHasSword(json.getBoolean("has_sword"));
+		
 		mySword.setX(json.getInt("sword_x"));
 		mySword.setY(json.getInt("sword_y"));
 
+		
+		
+		
 		JSONArray json_dragons = json.getJSONArray("dragons");
 		for (int c = 0; c < json_dragons.length(); c++) {
 			JSONObject json_dragon = json_dragons.getJSONObject(c);
