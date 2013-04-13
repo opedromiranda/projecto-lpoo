@@ -21,6 +21,8 @@ import com.jgoodies.forms.layout.RowSpec;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
+import java.io.IOException;
+
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 
@@ -85,6 +87,22 @@ public class labirintoGrafico {
 		panel.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("CARREGAR");
+		btnNewButton_3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					labirinto labirinto = new labirinto();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					// DATA WAS NOT LOADED, DO SOMETHING
+				}
+				
+			}
+			
+		});
 		panel.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("SAIR");

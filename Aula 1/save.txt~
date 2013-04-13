@@ -1,0 +1,16 @@
+{
+     "jogador_y": 3,
+     "lado_labirinto": ["6"],
+     "jogador_x": 1,
+     "eagle": [{
+          "has_sword": [false],
+          "y": [0],
+          "x": [0],
+          "is_free": [false]
+     }],
+     "dragons": [[{
+          "y": [2],
+          "x": [4]
+     }]],
+     "has_sword": [true]
+}

@@ -1,6 +1,9 @@
-WWWWWW
-W    W
-WX XXW
-W    W
-W X XW
-WWWSWW
+WWWWWWWWW
+WX   X XW
+W  X X  W
+W XX XX W
+W X   X W
+W XXX X W
+W  XX X W
+WX  X   W
+WWWSWWWWW
