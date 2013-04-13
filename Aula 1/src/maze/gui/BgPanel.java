@@ -14,6 +14,44 @@ class BgPanel extends JPanel {
     }
 }
 
+class Elemento extends JPanel{
+	Image bg;
+	boolean clicado = false;
+	String path;
+	
+	Graphics g;
+	
+	Elemento(String path){
+		bg = new ImageIcon(path).getImage();
+		this.path = path;
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+        g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+        this.g = g;
+    }
+    public void setImage(String path){
+    	System.out.println(bg.toString());
+    	bg = new ImageIcon(path).getImage();
+    	this.path = path;
+    	this.g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+    }
+    
+    boolean foiClicado(){
+    	return clicado;
+    }
+    void setfoiClicado(boolean b){
+    	clicado = b;
+    }
+    
+    public String getPath(){
+    	return path;
+    }
+    
+
+}
+
 class caminho extends JPanel{
 	Image bg = new ImageIcon("caminho.jpg").getImage();
     @Override
@@ -52,6 +90,8 @@ class heroi extends JPanel{
     public void paintComponent(Graphics g) {
         g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
     }
+    
+
 }
 
 class espada extends JPanel{

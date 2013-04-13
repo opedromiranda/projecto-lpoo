@@ -12,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
@@ -74,9 +76,11 @@ public class labirinto extends JFrame {
 		for (int c1 = 0; c1 < maze.getLado(); c1++) {
 			for (int c2 = 0; c2 < maze.getLado(); c2++) {
 				JPanel panel;
+			
 				if (c1 == myHero.getY() && c2 == myHero.getX()
 						&& myHero.getDrawing() == 'A') {
 					panel = new ash();
+			
 					panel.setLayout(new BorderLayout());
 				} else if (c1 == myHero.getY() && c2 == myHero.getX()
 						&& myHero.getDrawing() == 'H') {
@@ -228,8 +232,11 @@ public class labirinto extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(lado, lado));
 
+		
 		keyMove = new KeyMoveListener();
 		contentPane.addKeyListener(keyMove);
+		//contentPane.addMouseListener(myMouseListener);
+		
 		contentPane.setFocusable(true);
 		contentPane.requestFocusInWindow();
 		
@@ -237,6 +244,7 @@ public class labirinto extends JFrame {
 		printMaze();
 	}
 
+	
 	/**
 	 * 
 	 * @return 0 if load is successful, 1 if not.
@@ -263,6 +271,7 @@ public class labirinto extends JFrame {
 		System.out.print("FILE\n");
 		return 0;
 	}
+
 
 	/**
 	 * 
@@ -400,7 +409,9 @@ public class labirinto extends JFrame {
 		else if (dy < 0)
 			myEagle.setY(myEagle.getY() + 1);
 	}
-
+	
+	
+	
 	private class KeyMoveListener implements KeyListener {
 
 		@Override

@@ -18,6 +18,9 @@ import javax.swing.JSpinner;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
@@ -108,4 +111,6 @@ public class escolhaManual extends JFrame {
 		btnNewButton_1.setBounds(220, 153, 131, 57);
 		contentPane.add(btnNewButton_1);
 	}
+	
+
 }
