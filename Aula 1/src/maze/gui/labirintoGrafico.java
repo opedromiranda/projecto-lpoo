@@ -15,9 +15,6 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.FlowLayout;
 import java.awt.CardLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
@@ -93,7 +90,7 @@ public class labirintoGrafico {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				try {
-					labirinto labirinto = new labirinto();
+					labirinto labirinto = new labirinto("save.txt", "maze.txt");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

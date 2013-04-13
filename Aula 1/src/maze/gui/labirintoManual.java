@@ -77,61 +77,89 @@ public class labirintoManual extends JFrame {
 		contentPane.add(panel, BorderLayout.WEST);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 
-		JButton btnNewButton_1 = new JButton("Heroi");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
+		JButton btnHeroi = new JButton("Heroi");
+		btnHeroi.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = HEROI;
 			}
 		});
-		panel.add(btnNewButton_1);
+		panel.add(btnHeroi);
 
-		JButton btnNewButton = new JButton("Parede");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton btnParede = new JButton("Parede");
+		btnParede.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = PAREDE;
 			}
 		});
-		panel.add(btnNewButton);
+		panel.add(btnParede);
 
-		JButton btnNewButton_2 = new JButton("Drag\u00E3o");
-		btnNewButton_2.addMouseListener(new MouseAdapter() {
+		JButton btnDragao = new JButton("Drag\u00E3o");
+		btnDragao.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = DRAGAO;
 			}
 		});
-		panel.add(btnNewButton_2);
+		panel.add(btnDragao);
 
-		JButton btnNewButton_3 = new JButton("Caminho");
-		btnNewButton_3.addMouseListener(new MouseAdapter() {
+		JButton btnCaminho = new JButton("Caminho");
+		btnCaminho.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = CAMINHO;
 			}
 		});
-		panel.add(btnNewButton_3);
+		
+		JButton btnEspada = new JButton("Espada");
+		btnEspada.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				opcao_escolhida = ESPADA;
+				System.out.println(opcao_escolhida + "");
+			}
+		});
+		panel.add(btnEspada);
+		panel.add(btnCaminho);
 
-		JButton btnNewButton_4 = new JButton("Saída");
-		btnNewButton_4.addMouseListener(new MouseAdapter() {
+		JButton btnSaida = new JButton("Sa\u00EDda");
+		btnSaida.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = SAIDA;
 			}
 		});
-		panel.add(btnNewButton_4);
+		panel.add(btnSaida);
+		
+		JButton btnJogar = new JButton("Jogar");
+		btnJogar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				labirinto lab;
+				try {
+					lab = new labirinto("save_manual.txt", "maze_manual.txt");
+					setVisible(false);
+					
+				} catch (Throwable e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		panel.add(btnJogar);
 
 		panel_1 = new JPanel();
 
 		contentPane.add(panel_1, BorderLayout.CENTER);
 
-		panel_1.setLayout(new GridLayout(tamanho, tamanho)); // ALTERAR GRID
+		panel_1.setLayout(new GridLayout(13, 13)); // ALTERAR GRID
 																// PARA TAMHO
 																// QUANDO TESTAR
 																// EM JANELA
@@ -300,6 +328,8 @@ public class labirintoManual extends JFrame {
 				c = 'X';
 			else if(elem.getPath() == "canto.jpg")
 				c = 'W';
+			else if(elem.getPath() == "saida.jpg")
+				c = 'S';
 			//else if(elem.getPath() == "dragao.jpg")
 				//c = 'D';
 			//else if(elem.getPath() == "espada.jpg")

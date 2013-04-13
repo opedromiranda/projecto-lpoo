@@ -182,9 +182,9 @@ public class labirinto extends JFrame {
 	 * 
 	 * @throws IOException
 	 */
-	public labirinto() throws IOException {
+	public labirinto(String save,String mapa ) throws IOException {
 		// TODO Auto-generated constructor stub
-		String gameData = readFile("save.txt");
+		String gameData = readFile(save);
 
 		
 		JSONObject json = new JSONObject(gameData);
@@ -220,7 +220,7 @@ public class labirinto extends JFrame {
 		maze = new Maze(lado);
 		
 		matrix = new char[lado][lado];
-		loadMazeFromFile();
+		loadMazeFromFile(mapa);
 		
 		
 		
@@ -250,9 +250,9 @@ public class labirinto extends JFrame {
 	 * @return 0 if load is successful, 1 if not.
 	 * @throws IOException
 	 */
-	public static int loadMazeFromFile() throws IOException {
+	public static int loadMazeFromFile(String mapa) throws IOException {
 
-		FileInputStream fstream = new FileInputStream("maze.txt");
+		FileInputStream fstream = new FileInputStream(mapa);
 		DataInputStream in = new DataInputStream(fstream);
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
 		String strLine;
