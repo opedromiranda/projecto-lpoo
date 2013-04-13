@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import maze.logic.Celula;
 import maze.logic.Dragon;
 import maze.logic.Eagle;
@@ -18,6 +21,9 @@ import maze.logic.Sword;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Vector;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -38,21 +44,22 @@ public class labirintoManual extends JFrame {
 	static Maze maze;
 	String elemento;
 
-	
-	static Hero myHero = new Hero();
+	static Hero myHero = null;
 	static Sword mySword = new Sword();
 	static Eagle myEagle = new Eagle();
 
 	static Vector<JPanel> elementos = new Vector<JPanel>();
 
 	static int opcao_escolhida = 0;
-	
+
 	static final int PAREDE = 0;
 	static final int HEROI = 1;
 	static final int DRAGAO = 2;
 	static final int SAIDA = 3;
 	static final int CAMINHO = 4;
-	
+	static final int ESPADA = 5;
+
+	static int lado; 
 	
 	public labirintoManual(int tamanho, int dragoes) {
 		setVisible(true);
@@ -62,6 +69,8 @@ public class labirintoManual extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
+		lado = tamanho;
+		
 		maze = new Maze(tamanho);
 
 		panel = new JPanel();
@@ -69,55 +78,55 @@ public class labirintoManual extends JFrame {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JButton btnNewButton_1 = new JButton("Heroi");
-		btnNewButton_1.addMouseListener(new MouseAdapter(){
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = HEROI;
-			}			
+			}
 		});
 		panel.add(btnNewButton_1);
 
 		JButton btnNewButton = new JButton("Parede");
-		btnNewButton.addMouseListener(new MouseAdapter(){
+		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = PAREDE;
-			}			
+			}
 		});
 		panel.add(btnNewButton);
 
 		JButton btnNewButton_2 = new JButton("Drag\u00E3o");
-		btnNewButton_2.addMouseListener(new MouseAdapter(){
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = DRAGAO;
-			}			
+			}
 		});
 		panel.add(btnNewButton_2);
-		
+
 		JButton btnNewButton_3 = new JButton("Caminho");
-		btnNewButton_3.addMouseListener(new MouseAdapter(){
+		btnNewButton_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = CAMINHO;
-			}			
+			}
 		});
 		panel.add(btnNewButton_3);
-		
+
 		JButton btnNewButton_4 = new JButton("Saída");
-		btnNewButton_4.addMouseListener(new MouseAdapter(){
+		btnNewButton_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = SAIDA;
-			}			
+			}
 		});
 		panel.add(btnNewButton_4);
-		
+
 		panel_1 = new JPanel();
 
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -169,74 +178,55 @@ public class labirintoManual extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-		
-			System.out.println(": " + arg0.getSource().toString());
-
-			if (arg0.getSource() instanceof Elemento) {
-
-				Elemento parede = (Elemento) arg0.getSource();
-
-				System.out.println("Path: " + parede.getPath());
-				
-				
-				switch(opcao_escolhida){
-				case HEROI:
-					parede.setImage("heroi.jpg");
-					break;
-				case DRAGAO:
-					parede.setImage("dragao.jpg");
-					break;
-				case SAIDA:
-					parede.setImage("saida.jpg");
-					break;
-				case PAREDE:
-					parede.setImage("parede.jpg");
-					break;
-				case CAMINHO:
-					parede.setImage("caminho.jpg");
-					break;
-				default:
-					break;
-				}
-				//parede.setImage("caminho.jpg");
-
-				System.out.println("Num elementos: "
-						+ panel_1.getComponentCount());
-
-				if (parede.foiClicado() == false) {
-					System.out.println("Nunca foi clicado");
-					parede.setfoiClicado(true);
-
-				} else {
-					System.out.println("Já foi clicado");
-
-				}
-
-			}
-			else
-				System.out.println(arg0);
-
-			panel_1.removeAll();
-
-			System.out.println("NUMERO DE ELEMENTOS: " + elementos.size());
 			for (int c = 0; c < elementos.size(); c++) {
-				
-				JPanel p = new Elemento("caminho.jpg");
-				p.setLayout(new BorderLayout());
-				
-				Elemento elemActual = (Elemento) elementos.elementAt(c);
-				if (elemActual.getPath() == "parede.jpg") {
-					p = new Elemento("parede.jpg");
-					elementos.setElementAt(p, c);
+				Elemento actual = (Elemento) elementos.elementAt(c);
+				if (actual.getPath() == "heroi.jpg" && opcao_escolhida == HEROI) {
+					System.out.println("HEROI JA EXISTE");
+					Elemento novo2 = new Elemento("caminho.jpg");
+					elementos.setElementAt(novo2, c);
+					panel_1.add(novo2, c);
+					panel_1.remove(c + 1);
 					
 				}
-				p.addMouseListener(mouseClicked);
-				p.setFocusable(true);
-				panel_1.add(p);
-				
+
+				if (arg0.getSource() == elementos.elementAt(c)) {
+
+					Elemento novo = new Elemento("caminho.jpg");
+
+					switch (opcao_escolhida) {
+					case HEROI:
+						myHero = new Hero();
+						novo.setImage("heroi.jpg");
+						break;
+					case DRAGAO:
+						novo.setImage("dragao.jpg");
+						break;
+					case SAIDA:
+						novo.setImage("saida.jpg");
+						break;
+					case PAREDE:
+						novo.setImage("parede.jpg");
+						break;
+					case CAMINHO:
+						novo.setImage("caminho.jpg");
+						break;
+					case ESPADA:
+						novo.setImage("espada.jpg");
+						break;
+					default:
+						break;
+					}
+
+					novo.setLayout(new BorderLayout());
+					novo.addMouseListener(mouseClicked);
+					novo.setFocusable(true);
+					elementos.setElementAt(novo, c);
+					panel_1.add(novo, c);
+					panel_1.remove(c + 1);
+				}
 			}
 
-			
+			save();
 			panel_1.validate();
 		}
 
@@ -264,5 +254,96 @@ public class labirintoManual extends JFrame {
 
 		}
 
+	}
+	
+	void save(){
+		char[][] m = new char[lado][lado];
+		int x = 0;
+		int y = 0;
+		char c = 'W';
+		
+		JSONObject main = new JSONObject();
+		main.put("lado_labirinto",lado);
+		
+		JSONObject eagle_attributes = new JSONObject();
+		eagle_attributes.put("has_sword", false);
+		eagle_attributes.put("is_free", false);
+		eagle_attributes.put("x", 0);
+		eagle_attributes.put("y", 0);
+		
+		
+		JSONArray json_dragons = new JSONArray();
+		
+		for(int i = 0; i < elementos.size(); i++){
+			Elemento elem = (Elemento) elementos.elementAt(i);
+			
+			//if(elem.getPath() == "heroi.jpg")
+				//c = 'H';
+			if(elem.getPath() == "dragao.jpg"){
+				json_dragons.put(new JSONObject()
+									.put("x", y)
+									.put("y", x));
+			}
+			if(elem.getPath() == "heroi.jpg"){
+				main.put("jogador_x", y);
+				main.put("jogador_y", x);
+				main.put("has_sword", false);
+
+			}
+			
+			if(elem.getPath() == "espada.jpg"){
+				main.put("sword_x", y);
+				main.put("sword_y", x);
+
+			}
+			if(elem.getPath() == "parede.jpg")
+				c = 'X';
+			else if(elem.getPath() == "canto.jpg")
+				c = 'W';
+			//else if(elem.getPath() == "dragao.jpg")
+				//c = 'D';
+			//else if(elem.getPath() == "espada.jpg")
+				//c = 'E';
+			else
+			//if(elem.getPath() == "caminho.jpg")
+				c = ' ';
+			m[y][x] = c;
+			x++;
+			if(x == lado){
+				x=0;
+				y++;
+			}
+			
+		}
+		
+		main.put("eagle", eagle_attributes);
+		main.put("dragons", json_dragons);
+
+		
+		String mazeTXT = "";
+
+		for (int i = 0; i < lado; i++) {
+			for (int v = 0; v < lado; v++) {
+				mazeTXT += m[i][v];
+			}
+			mazeTXT += "\n";
+		}
+		try {
+			FileWriter fstream = new FileWriter("save_manual.txt");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(main.toString(5));
+			out.close();
+			fstream = new FileWriter("maze_manual.txt");
+			out = new BufferedWriter(fstream);
+			out.write(mazeTXT);
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		
+		
 	}
 }

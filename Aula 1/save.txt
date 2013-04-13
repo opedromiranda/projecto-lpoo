@@ -1,23 +1,55 @@
 {
      "sword_x": 0,
      "sword_y": 0,
-     "jogador_y": 3,
-     "lado_labirinto": "14",
-     "jogador_x": 1,
+     "jogador_y": 2,
+     "lado_labirinto": "13",
+     "jogador_x": 5,
      "eagle": {
-          "has_sword": true,
-          "y": 10,
-          "x": 12,
+          "has_sword": false,
+          "y": 0,
+          "x": 0,
           "is_free": false
      },
      "dragons": [
           {
-               "y": 0,
-               "x": 0
+               "y": 5,
+               "x": 1
           },
           {
-               "y": 0,
-               "x": 0
+               "y": 11,
+               "x": 11
+          },
+          {
+               "y": 1,
+               "x": 8
+          },
+          {
+               "y": 2,
+               "x": 10
+          },
+          {
+               "y": 3,
+               "x": 7
+          },
+          {
+               "y": 1,
+               "x": 8
+          },
+          {
+               "y": 3,
+               "x": 9
+          },
+          {
+               "y": 3,
+               "x": 8
+          },
+          {
+               "y": 8,
+               "x": 7
+          },
+          {
+               "y": 7,
+               "x": 11
           }
      ],
      "has_sword": true

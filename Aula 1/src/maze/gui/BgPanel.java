@@ -35,7 +35,6 @@ class Elemento extends JPanel{
     	System.out.println(bg.toString());
     	bg = new ImageIcon(path).getImage();
     	this.path = path;
-    	this.g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
     }
     
     boolean foiClicado(){
