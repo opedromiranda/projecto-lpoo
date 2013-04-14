@@ -28,7 +28,6 @@ public class escolhaManual extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtSelecioneOTamanho;
-	private JTextField txtQuantosDragesQuer;
 	public static escolha frame = new escolha();
 	public int dragons;
 	public int tamanho;
@@ -51,7 +50,7 @@ public class escolhaManual extends JFrame {
 		txtSelecioneOTamanho = new JTextField();
 		txtSelecioneOTamanho.setEditable(false);
 		txtSelecioneOTamanho.setText("Selecione o tamanho da labirinto (AxA) ( > 5) :");
-		txtSelecioneOTamanho.setBounds(10, 42, 247, 20);
+		txtSelecioneOTamanho.setBounds(10, 42, 269, 20);
 		contentPane.add(txtSelecioneOTamanho);
 		txtSelecioneOTamanho.setColumns(10);
 		
@@ -65,32 +64,14 @@ public class escolhaManual extends JFrame {
 		spinner.setBounds(289, 42, 62, 20);
 		contentPane.add(spinner);
 		
-		txtQuantosDragesQuer = new JTextField();
-		txtQuantosDragesQuer.setEditable(false);
-		txtQuantosDragesQuer.setText("Quantos drag\u00F5es quer (> 0) ?");
-		txtQuantosDragesQuer.setColumns(10);
-		txtQuantosDragesQuer.setBounds(10, 105, 247, 20);
-		contentPane.add(txtQuantosDragesQuer);
-		
-		final JSpinner spinner_1 = new JSpinner();
-		spinner_1.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				Object valor2 = spinner_1.getValue();
-				dragons = valor2.hashCode();
-				
-			}
-		});
-		spinner_1.setBounds(289, 105, 62, 20);
-		contentPane.add(spinner_1);
-		
 		final JButton btnNewButton = new JButton("Criar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(dragons == 0 || tamanho < 5){
+				if(tamanho < 5){
 					JDialog nada = new nada();
 				}
 				else{
-					labirintoManual labirintoManual = new labirintoManual(tamanho, dragons);
+					labirintoManual labirintoManual = new labirintoManual(tamanho);
 					setVisible(false);
 					
 				}

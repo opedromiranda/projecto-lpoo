@@ -12,7 +12,11 @@ public class Maze {
 	Vector<Celula> caminhos = new Vector<Celula>(); // vector que guarda todos
 													// os espacos brancos. Para
 													// depois colocar dragao.
-
+/**
+ * 
+ * 
+ * @param l construtor que cria maze de lado l
+ */
 	public Maze(int l) {
 		lado = l;
 		matrix = new char[lado][lado];
@@ -20,9 +24,18 @@ public class Maze {
 		createExit();
 		generate();
 	}
+	/**
+	 * 
+	 * 
+	 * @return celulas possiveis de colocar elementos
+	 */
 	public Vector<Celula> getCaminho(){
 		return caminhos;
 	}
+	
+	/**
+	 * preenche matriz de X para depois construir caminhos
+	 */
 	void fillMatrix() {
 		for (int c1 = 0; c1 < lado; c1++) {
 			for (int c2 = 0; c2 < lado; c2++) {
@@ -34,6 +47,10 @@ public class Maze {
 		}
 	}
 
+	/**
+	 * 
+	 * Cria saida num lado aleatorio
+	 */
 	void createExit() {
 		Random r = new Random();
 		int l = r.nextInt(4) + 1; // 0 a 3
@@ -66,10 +83,18 @@ public class Maze {
 		}
 	}
 
+	/*
+	 * 
+	 * devolve o tamanho do lado da matriz
+	 */
 	public int getLado() {
 		return lado;
 	}
 
+	/*
+	 * 
+	 * cria os caminhos e paredes da matriz
+	 */
 	public char[][] generate() {
 		matrix[y][x] = ' ';
 		Celula c1 = new Celula(x, y);
@@ -141,7 +166,12 @@ public class Maze {
 		return matrix;
 	}
 
-	
+	/**
+	 * 
+	 * @param c1 celula a avaliar
+	 * @param c, se 0: cima, 1: baixo, 2: direita, 3:esquerda.
+	 * @return devolve um boleano se a celula para onde queremos ir ja tem um caminho adjacente
+	 */
 	boolean temCantosBrancos(Celula c1,int c){
 		boolean result = false;
 		
@@ -201,6 +231,11 @@ public class Maze {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param c1, se 0: cima, 1: baixo, 2: direita, 3:esquerda.
+	 * @return Devolve se celula destino tem celulas adjacentes brancas
+	 */
 	int celulaIsolada(Celula c1) {
 		Celula cima = new Celula(c1.getX(), c1.getY() - 1);
 		Celula baixo = new Celula(c1.getX(), c1.getY() + 1);

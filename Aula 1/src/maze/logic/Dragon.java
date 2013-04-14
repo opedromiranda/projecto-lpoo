@@ -12,19 +12,27 @@ public class Dragon extends Element {
 		super('D');
 		
 	}
-	
+	/**
+	 * 
+	 * @param espada - deteta de depois de mover o dragao, fica em cima da espada
+	 * @param matrix
+	 * 
+	 * move dragao, fazendo um random m(0 - 10): se for maior que 3 está acordado, senão esta a dormir.
+	 * tem um inteiro tentativas caso o dragao esteja rodeado de paredes, ao fim de 4 tentativas não se mexe
+	 */
 	public void moveDragon( Sword espada, char[][] matrix){
 		
 		Random m = new Random();
 		int mover = m.nextInt(10);
-		
+		int tentativas = 0;
 		if (mover > 3){
 		Random r = new Random();
 		int[] newDragonPosition = new int[2];
 		boolean movimentoValido = false;
 		
 	
-		while (!movimentoValido){		
+		while (!movimentoValido && tentativas < 5){
+			tentativas++;
 			int movement = r.nextInt(4) + 1;
 			switch (movement) {
 			case 1: // goes left

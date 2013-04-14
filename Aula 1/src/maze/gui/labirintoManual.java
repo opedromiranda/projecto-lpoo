@@ -59,9 +59,12 @@ public class labirintoManual extends JFrame {
 	static final int CAMINHO = 4;
 	static final int ESPADA = 5;
 
-	static int lado; 
+	static int lado;
+	static boolean existeSaida = false;
+	static boolean existeHeroi = false;
+	static boolean existeEspada = false;
 	
-	public labirintoManual(int tamanho, int dragoes) {
+	public labirintoManual(int tamanho) {
 		setVisible(true);
 		setBounds(100, 100, 436, 286);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,15 +80,15 @@ public class labirintoManual extends JFrame {
 		contentPane.add(panel, BorderLayout.WEST);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 
-		JButton btnHeroi = new JButton("Heroi");
-		btnHeroi.addMouseListener(new MouseAdapter() {
+		JButton btnJerry = new JButton("Jerry");
+		btnJerry.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = HEROI;
 			}
 		});
-		panel.add(btnHeroi);
+		panel.add(btnJerry);
 
 		JButton btnParede = new JButton("Parede");
 		btnParede.addMouseListener(new MouseAdapter() {
@@ -97,15 +100,15 @@ public class labirintoManual extends JFrame {
 		});
 		panel.add(btnParede);
 
-		JButton btnDragao = new JButton("Drag\u00E3o");
-		btnDragao.addMouseListener(new MouseAdapter() {
+		JButton btnTom = new JButton("Tom");
+		btnTom.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = DRAGAO;
 			}
 		});
-		panel.add(btnDragao);
+		panel.add(btnTom);
 
 		JButton btnCaminho = new JButton("Caminho");
 		btnCaminho.addMouseListener(new MouseAdapter() {
@@ -116,26 +119,25 @@ public class labirintoManual extends JFrame {
 			}
 		});
 		
-		JButton btnEspada = new JButton("Espada");
-		btnEspada.addMouseListener(new MouseAdapter() {
+		JButton btnQueijo = new JButton("Queijo");
+		btnQueijo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				opcao_escolhida = ESPADA;
-				System.out.println(opcao_escolhida + "");
 			}
 		});
-		panel.add(btnEspada);
+		panel.add(btnQueijo);
 		panel.add(btnCaminho);
 
-		JButton btnSaida = new JButton("Sa\u00EDda");
-		btnSaida.addMouseListener(new MouseAdapter() {
+		JButton btnToca = new JButton("Toca");
+		btnToca.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				opcao_escolhida = SAIDA;
 			}
 		});
-		panel.add(btnSaida);
+		panel.add(btnToca);
 		
 		JButton btnJogar = new JButton("Jogar");
 		btnJogar.addMouseListener(new MouseAdapter() {
@@ -143,8 +145,10 @@ public class labirintoManual extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				labirinto lab;
 				try {
+					
+					if(existeSaida && existeHeroi && existeEspada){
 					lab = new labirinto("save_manual.txt", "maze_manual.txt");
-					setVisible(false);
+					setVisible(false);}
 					
 				} catch (Throwable e1) {
 					// TODO Auto-generated catch block
@@ -159,7 +163,7 @@ public class labirintoManual extends JFrame {
 
 		contentPane.add(panel_1, BorderLayout.CENTER);
 
-		panel_1.setLayout(new GridLayout(13, 13)); // ALTERAR GRID
+		panel_1.setLayout(new GridLayout(tamanho, tamanho)); // ALTERAR GRID
 																// PARA TAMHO
 																// QUANDO TESTAR
 																// EM JANELA
@@ -206,15 +210,21 @@ public class labirintoManual extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			
 			for (int c = 0; c < elementos.size(); c++) {
 				Elemento actual = (Elemento) elementos.elementAt(c);
-				if (actual.getPath() == "heroi.jpg" && opcao_escolhida == HEROI) {
-					System.out.println("HEROI JA EXISTE");
+				if (actual.getPath() == "jerry.jpg" && opcao_escolhida == HEROI) {
 					Elemento novo2 = new Elemento("caminho.jpg");
 					elementos.setElementAt(novo2, c);
 					panel_1.add(novo2, c);
 					panel_1.remove(c + 1);
 					
+				}
+				else if (actual.getPath() == "espada.jpg" && opcao_escolhida == ESPADA) {
+					Elemento novo2 = new Elemento("caminho.jpg");
+					elementos.setElementAt(novo2, c);
+					panel_1.add(novo2, c);
+					panel_1.remove(c + 1);
 				}
 
 				if (arg0.getSource() == elementos.elementAt(c)) {
@@ -223,23 +233,25 @@ public class labirintoManual extends JFrame {
 
 					switch (opcao_escolhida) {
 					case HEROI:
-						myHero = new Hero();
-						novo.setImage("heroi.jpg");
+						novo.setImage("jerry.jpg");
+						existeHeroi = true;
 						break;
 					case DRAGAO:
 						novo.setImage("dragao.jpg");
 						break;
 					case SAIDA:
 						novo.setImage("saida.jpg");
+						existeSaida = true;
 						break;
 					case PAREDE:
-						novo.setImage("parede.jpg");
+						novo.setImage("milk.jpg");
 						break;
 					case CAMINHO:
 						novo.setImage("caminho.jpg");
 						break;
 					case ESPADA:
 						novo.setImage("espada.jpg");
+						existeEspada = true;
 						break;
 					default:
 						break;
@@ -305,23 +317,21 @@ public class labirintoManual extends JFrame {
 		for(int i = 0; i < elementos.size(); i++){
 			Elemento elem = (Elemento) elementos.elementAt(i);
 			
-			//if(elem.getPath() == "heroi.jpg")
-				//c = 'H';
 			if(elem.getPath() == "dragao.jpg"){
 				json_dragons.put(new JSONObject()
-									.put("x", y)
-									.put("y", x));
+									.put("x", x)
+									.put("y", y));
 			}
 			if(elem.getPath() == "heroi.jpg"){
-				main.put("jogador_x", y);
-				main.put("jogador_y", x);
+				main.put("jogador_x", x);
+				main.put("jogador_y", y);
 				main.put("has_sword", false);
 
 			}
 			
 			if(elem.getPath() == "espada.jpg"){
-				main.put("sword_x", y);
-				main.put("sword_y", x);
+				main.put("sword_x", x);
+				main.put("sword_y", y);
 
 			}
 			if(elem.getPath() == "parede.jpg")
@@ -330,12 +340,7 @@ public class labirintoManual extends JFrame {
 				c = 'W';
 			else if(elem.getPath() == "saida.jpg")
 				c = 'S';
-			//else if(elem.getPath() == "dragao.jpg")
-				//c = 'D';
-			//else if(elem.getPath() == "espada.jpg")
-				//c = 'E';
 			else
-			//if(elem.getPath() == "caminho.jpg")
 				c = ' ';
 			m[y][x] = c;
 			x++;

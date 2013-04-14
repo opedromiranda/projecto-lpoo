@@ -76,45 +76,47 @@ public class labirinto extends JFrame {
 		for (int c1 = 0; c1 < maze.getLado(); c1++) {
 			for (int c2 = 0; c2 < maze.getLado(); c2++) {
 				JPanel panel;
-			
 				if (c1 == myHero.getY() && c2 == myHero.getX()
 						&& myHero.getDrawing() == 'A') {
-					panel = new ash();
-			
+					panel = new Elemento ("jerryMonstro.jpg");
 					panel.setLayout(new BorderLayout());
 				} else if (c1 == myHero.getY() && c2 == myHero.getX()
 						&& myHero.getDrawing() == 'H') {
-					panel = new heroi();
+					panel = new Elemento ("jerry.jpg");
+					panel.setLayout(new BorderLayout());
+				}
+				else if (matrix[c1][c2] == 'F') {
+					panel = new Elemento ("emCima.jpg");
 					panel.setLayout(new BorderLayout());
 				} else if (c1 == mySword.getY() && c2 == mySword.getX()
 						&& mySword.getDrawing() == 'E') {
-					panel = new espada();
+					panel = new Elemento ("espada.jpg");
 					panel.setLayout(new BorderLayout());
 				} else if (c1 == mySword.getY() && c2 == mySword.getX()
 						&& mySword.getY() == 0 && mySword.getX() == 0) {
-					panel = new parede();
+					panel = new Elemento ("parede.jpg");
 					panel.setLayout(new BorderLayout());
 				} else if (c1 == myEagle.getY() && c2 == myEagle.getX()
 						&& myEagle.isFree()) {
-					panel = new aguia();
+					panel = new Elemento ("aguia.jpg");
 					panel.setLayout(new BorderLayout());
 				} else if (matrix[c1][c2] == 'X') {
-					panel = new parede();
+					panel = new Elemento ("milk.jpg");
 					panel.setLayout(new BorderLayout());
 				} else if (matrix[c1][c2] == ' ') {
-					panel = new caminho();
+					panel = new Elemento ("caminho.jpg");
 					panel.setLayout(new BorderLayout());
 				} else if (matrix[c1][c2] == 'A') {
-					panel = new ash();
+					panel = new Elemento ("ash.jpg");
 					panel.setLayout(new BorderLayout());
 				} else if (matrix[c1][c2] == 'W') {
-					panel = new parede();
+					panel = new Elemento ("parede.jpg");
 					panel.setLayout(new BorderLayout());
 				} else if (matrix[c1][c2] == 'S') {
-					panel = new caminho();
+					panel = new Elemento ("saida.jpg");
 					panel.setLayout(new BorderLayout());
 				} else {
-					panel = new dragao();
+					panel = new Elemento ("dragao.jpg");
 					panel.setLayout(new BorderLayout());
 				}
 
@@ -168,8 +170,7 @@ public class labirinto extends JFrame {
 		myHero.setX(posJogador.getX());
 		myHero.setY(posJogador.getY());
 
-		System.out.print(posJogador.getX() + " pos Y " + posJogador.getY());
-
+		
 		mySword.setX(posEspada.getX());
 		mySword.setY(posEspada.getY());
 
@@ -259,7 +260,6 @@ public class labirinto extends JFrame {
 		int y = 0;
 		
 		while((strLine = br.readLine()) != null) {
-			System.out.print(strLine + "\n");
 			for (int c = 0; c < strLine.length(); c++) {
 				
 				matrix[y][c] = strLine.charAt(c);
@@ -268,7 +268,6 @@ public class labirinto extends JFrame {
 		}
 		in.close();
 
-		System.out.print("FILE\n");
 		return 0;
 	}
 
